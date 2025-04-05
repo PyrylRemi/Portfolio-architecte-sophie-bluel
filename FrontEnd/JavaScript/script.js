@@ -104,23 +104,39 @@ const createFigure = (work) => {
 }
 // on gère les elements lorsque connectée 
 const token = localStorage.getItem("token");
-const profile = document.querySelector(".profile");
+const logout = document.querySelector("#logout");
+const modifier = document.querySelector(".modifier");
+const edition = document.querySelector(".edition");
+let connected = false;
 console.log(token);
 
-if (token) {
-categoryMenu.style.display ="none";
-profile.textContent = "logout";     
-}
+
+document.addEventListener("DOMContentLoaded",()=>{
+    if (token){
+        connected = true;
+    }
+
+
+    if (connected) {
+        categoryMenu.style.display ="none";
+       logout.textContent = "logout";
+        edition.style.display = null;
+        } else {
+            categoryMenu.style.display = "flex";
+            modifier.style.display = "none";
+            edition.style.display ="none";
+        }
+})
+
 
 // gérer la deconexion 
-
-document.addEventListener("DOMContentLoaded", function () {
-    const logoutButton = document.querySelector(".profile");
-
-    if (logoutButton) {
-        logoutButton.addEventListener("click", function () {
-            localStorage.removeItem("token");
-            window.location.href = "index.html"; 
-        });
+logout.addEventListener("click", ()=>{
+    if (connected){
+        connected =false;
+        localStorage.removeItem("token");
+        logout.textContent = "login";
+        logout.href = "index.html";
+    }else {
+        window.location.href = "index.html";
     }
-});
+})

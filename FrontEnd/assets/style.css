@@ -329,9 +329,10 @@ footer nav ul {
 
 #logout {
 	text-decoration: none;
+	color: black;
 }
 
-#logout :hover {
+#logout:hover {
 	color: #B1663C;
 }
 

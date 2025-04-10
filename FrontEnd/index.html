@@ -40,7 +40,7 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
-		<p class="modifier"><i class="fa-solid fa-pen-to-square"></i>modifier</p>
+		<p id="open-modal-btn" class="modifier"><i class="fa-solid fa-pen-to-square"></i> modifier</p>
 		<div class="category-menu"></div>
 		<div class="gallery">
 		</div>
@@ -73,4 +73,13 @@
       crossorigin="anonymous"
     ></script>
 </body>
+<div id="modal" class="modal">
+	<div class="modal-content">
+	  <span class="close">&times;</span>
+	  <h3>Galerie photo</h3>
+	  <div class="modal-gallery" id="modal-gallery"></div>
+	  <hr />
+	  <button class="btn-add-photo">Ajouter une photo</button>
+	</div>
+  </div>
 </html>

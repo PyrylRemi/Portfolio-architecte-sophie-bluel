@@ -1,9 +1,12 @@
 // ========== Catégories ==========
+let allCategories = [];
 const fetchCategories = async () => {
     try {
       const response = await fetch("http://localhost:5678/api/categories");
       if (!response.ok) throw new Error("Erreur API catégories");
-      return await response.json();
+      allCategories = await response.json();
+      console.log ("toute les catégorie",allCategories)
+      return allCategories ;
     } catch (error) {
       console.error("Erreur dans la récupération des catégories");
       return [];
@@ -150,7 +153,7 @@ const fetchCategories = async () => {
   
       const trash = document.createElement("i");
       trash.classList.add("fa-solid", "fa-trash-can", "delete-icon");
-      trash.dataset.id = work.id; // stocke l'ID du projet
+      trash.dataset.id = work.id; 
   
       // Ajout du gestionnaire de suppression
       trash.addEventListener("click", async () => {
@@ -191,6 +194,57 @@ const fetchCategories = async () => {
     }
   }
   
+
+
+
+  // test JS téléversement
+
+const boutonAjouterPhoto = document.querySelector(".ajouter-photo-btn"); 
+const modaleAjout = document.getElementById("modale-ajout-photo");
+const boutonFermer = document.querySelector(".fermer-modale");
+const boutonRetour = document.querySelector(".retour-modale");
+const selectCategorie = document.getElementById("categorie-photo");
+const formulaireAjout = document.getElementById("formulaire-ajout-photo");
+
+const categoriesDropdown = () => {
+  selectCategorie.innerHTML = "";
+  const optionDefault = document.createElement("option");
+  selectCategorie.appendChild(optionDefault);
+  allCategories.forEach((categorie)=>{
+    const option= document.createElement("option");
+    option.value = categorie.name;
+    option.innerHTML = categorie.name;
+    option.id = categorie.id
+    selectCategorie.appendChild(option);
+  })
+}
+
+// Ouvrir la modale
+const firstModal = document.querySelector(".modal-content");
+if (boutonAjouterPhoto) {
+  boutonAjouterPhoto.addEventListener("click", () => {
+    modaleAjout.style.display = "flex";
+    firstModal.style.display = "none";
+    categoriesDropdown();
+  });
+}
+
+// Fermer modale (croix et fleche)
+if (boutonFermer) {
+  boutonFermer.addEventListener("click", () => {
+    modaleAjout.style.display = "none";
+    formulaireAjout.reset();
+  });
+}
+if (boutonRetour) {
+  boutonRetour.addEventListener("click", () => {
+    modaleAjout.style.display = "none";
+    modal.style.display = "flex";
+    formulaireAjout.reset();
+  });
+}
+
+
 
 
 

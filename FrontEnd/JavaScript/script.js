@@ -150,7 +150,7 @@ const fetchCategories = async () => {
   
       const trash = document.createElement("i");
       trash.classList.add("fa-solid", "fa-trash-can", "delete-icon");
-      trash.dataset.id = work.id; // 🔑 stocke l'ID du projet
+      trash.dataset.id = work.id; // stocke l'ID du projet
   
       // Ajout du gestionnaire de suppression
       trash.addEventListener("click", async () => {

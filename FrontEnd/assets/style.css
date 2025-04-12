@@ -344,6 +344,7 @@ footer nav ul {
 	position: absolute;
     top: 64%;
     right: 26%;
+	cursor: pointer;
 }
  /* gestion de l'édition */
 .edition {
@@ -430,7 +431,7 @@ font-weight: 400;
 	cursor: pointer;
   }
   
-  .btn-add-photo {
+  .ajouter-photo-btn {
 	background-color: #1D6154;
 	color: white;
 	border: none;
@@ -446,3 +447,100 @@ font-weight: 400;
 	font-size: 24px;
 	cursor: pointer;
   }
+
+  /* modale téléverser photos */
+
+  .modale-ajout-photo {
+  background-color: white;
+  width: 600px;
+  padding: 30px;
+  border-radius: 10px;
+  position: relative;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.modale-ajout-photo h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.fermer-modale {
+  position: absolute;
+  font-size: 22px;
+  cursor: pointer;
+  top: 20px;
+  color: #333;
+}
+
+.retour-modale {
+  left: 20px;
+}
+
+.fermer-modale {
+  right: 20px;
+}
+
+.zone-televersement {
+  background-color: #e8f1f7;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.label-televersement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icone-image-upload {
+  font-size: 60px;
+  color: #b9c5cc;
+  margin-bottom: 10px;
+}
+
+.label-televersement p {
+  background-color: #cbd6dc;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.info-fichier {
+  font-size: 12px;
+  color: #666;
+  margin-top: 8px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 20px;
+}
+
+hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+.bouton-valider-ajout {
+  background-color: #a7a7a7;
+  color: white;
+  padding: 12px 50px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}

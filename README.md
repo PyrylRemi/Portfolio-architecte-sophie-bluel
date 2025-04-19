@@ -23,3 +23,5 @@ pour kill le port
 netStat 
 
 pour faire le pipe alt gr et 6
+
+pour faire & faire fleche et num 1

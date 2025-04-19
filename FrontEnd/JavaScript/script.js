@@ -112,9 +112,10 @@ const fetchCategories = async () => {
     logout.addEventListener("click", () => {
       if (connected) {
         localStorage.removeItem("token");
-        window.location.href = "index.html";
+        logout.textContent = "login";
+        logout.href = "index.html";
       } else {
-        window.location.href = "login.html";
+        window.location.href = "index.html";
       }
     });
   
@@ -244,7 +245,69 @@ if (boutonRetour) {
   });
 }
 
+// afficher la prévisualisation
+const inputFichier = document.getElementById("input-photo");
+const imageApercu = document.getElementById("apercu-image");
 
+inputFichier.addEventListener("change", (event) => {
 
+  const fichier = event.target.files[0];
+  const ACCEPTED_EXTENSIONS = ["png","jpg"];
+  const fileName = fichier.name ;
+  const extension = fileName.split(".").pop().toLowerCase();
 
+  if (fichier && fichier.size <= 4 * 1024 * 1024 &&  ACCEPTED_EXTENSIONS.includes(extension) ) {
+    const reader = new FileReader();
+    reader.onload = (e)=> {
+    imageApercu.src = e.target.result;
+    imageApercu.style.display = "flex";
+    document.querySelector(".label-televersement p").style.display = "none";
+    document.querySelector(".label-televersement i").style.display = "none";
+    document.querySelector(".label-televersement span").style.display = "none";
+    };
+    reader.readAsDataURL(fichier);
+  } else {
+    console.error("l'image ne respecte pas les critères");
+  }
+});
 
+// gerer le chagement de couleur du bouton valider
+
+formulaireAjout.addEventListener("submit",async(e)=>{
+e.preventDefault(); //empeche de  faire la soumission du formulaire par default
+await connect();
+})
+
+//Pour transformer l'image en blob (binary large object) afin de faciliter le televersement.
+const convertDataURLToBlob = async (dataurl) => {
+  const res = await fetch(dataurl);
+  return await res.blob();
+};
+
+const connect = async () => {
+  const title = document.getElementById("titre-photo").value;
+  const select = document.getElementById("categorie-photo");
+  const optionName = select.options[select.selectedIndex].innerText;
+  const optionId = select.options[select.selectedIndex].id;
+  const selectedFile = inputFichier.files[0];
+
+  const reader = new FileReader();
+  reader.onloadend = async (event)=> {
+    const base64String = event.target.result;
+    const blobImg = await convertDataURLToBlob(base64String);
+
+    const formData = new FormData();
+    formData.append("image",blobImg);
+    formData.append("category",optionId);
+    formData.append("title",title);
+
+    uploadWorkToDataBase(token,formData,title,optionName);
+  }
+    reader.readAsDataURL(selectedFile);
+}
+
+  // methode pour ajouter un work a la BDD depuis la gallerie
+
+    const uploadWorkToDataBase = async(token,formData,title,optionName) => {
+      
+    }

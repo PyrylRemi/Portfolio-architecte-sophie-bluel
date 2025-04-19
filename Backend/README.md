@@ -29,3 +29,6 @@ npm start
 [documentation Swagger](http://localhost:5678/api-docs/)
 
 Pour lire la documentation, utiliser Chrome ou Firefox
+
+pour selectionner le back end dans le terminal 
+cd tab tab  

@@ -126,6 +126,7 @@ const fetchCategories = async () => {
     modifier.addEventListener("click", () => {
       modal.style.display = "flex";
       displayModalGallery(allWorks);
+
     });
   
     closeModalBtn.addEventListener("click", () => {
@@ -220,13 +221,15 @@ const categoriesDropdown = () => {
   })
 }
 
-// Ouvrir la modale
+// Ouvrir la modale 2
 const firstModal = document.querySelector(".modal-content");
 if (boutonAjouterPhoto) {
   boutonAjouterPhoto.addEventListener("click", () => {
     modaleAjout.style.display = "flex";
     firstModal.style.display = "none";
     categoriesDropdown();
+    changerCouleurButton();
+    resetFormulaire();
   });
 }
 
@@ -234,14 +237,14 @@ if (boutonAjouterPhoto) {
 if (boutonFermer) {
   boutonFermer.addEventListener("click", () => {
     modaleAjout.style.display = "none";
-    formulaireAjout.reset();
+    resetFormulaire();
   });
 }
 if (boutonRetour) {
   boutonRetour.addEventListener("click", () => {
     modaleAjout.style.display = "none";
-    modal.style.display = "flex";
-    formulaireAjout.reset();
+    firstModal.style.display = "block";
+    resetFormulaire();
   });
 }
 
@@ -301,13 +304,90 @@ const connect = async () => {
     formData.append("category",optionId);
     formData.append("title",title);
 
-    uploadWorkToDataBase(token,formData,title,optionName);
+    uploadWorkToDataBase(token,formData);
   }
     reader.readAsDataURL(selectedFile);
 }
 
   // methode pour ajouter un work a la BDD depuis la gallerie
 
-    const uploadWorkToDataBase = async(token,formData,title,optionName) => {
-      
+   const uploadWorkToDataBase = async (token, formData,) => {
+  try {
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      body: formData,
+    });
+
+    if (response.ok) {
+      const newWork = await response.json();
+      console.log("il ajoute",newWork)
+      // Ajouter dans le tableau
+      allWorks.push(newWork);
+      displayGallery(allWorks);
+      displayModalGallery(allWorks);
+
+      // Réinitialiser l’interface
+      resetFormulaire();
+      document.getElementById("apercu-image").style.display = "none";
+      document.querySelector(".label-televersement p").style.display = "block";
+      document.querySelector(".label-televersement i").style.display = "block";
+      document.querySelector(".label-televersement span").style.display = "block";
+      modaleAjout.style.display = "none";
+      modal.style.display = "flex";
+
+      alert("Work ajouté !");
+    } else {
+      alert("Erreur dans l'ajout du Work.");
     }
+  } catch (error) {
+    console.error("Erreur lors de l'envoi :", error);
+    alert("Une erreur est survenue.");
+  }
+};
+
+   const validateButton = document.querySelector(".bouton-valider-ajout");
+   const champs = formulaireAjout.querySelectorAll("input");
+    const selects = formulaireAjout.querySelectorAll("select");
+   const buttonColor = () => {
+    
+    for(let select of selects){
+      if(!select.value) {
+        return false;
+      }
+    }
+    for(let champ of champs){
+      if(!champ.value) {
+        return false;
+      }
+    }
+    return true;
+   }
+
+   const changerCouleurButton = () => {
+    if (buttonColor()){
+      validateButton.style.backgroundColor = "#1D6154";
+      validateButton.style.cursor = "pointer";
+    } else {
+      validateButton.style.backgroundColor = "";
+    }
+   }
+
+   for(let champ of champs){
+    champ.addEventListener("input",changerCouleurButton);
+   }
+
+   for(let select of selects){
+    select.addEventListener("input",changerCouleurButton);
+   }
+
+   const resetFormulaire = () => {
+    formulaireAjout.reset();
+    imageApercu.src = "";
+    imageApercu.style.display = "none";
+    document.querySelector(".label-televersement p").style.display = "block";
+    document.querySelector(".label-televersement i").style.display = "block";
+    document.querySelector(".label-televersement span").style.display = "block";
+   }

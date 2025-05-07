@@ -329,6 +329,8 @@ const connect = async () => {
       displayGallery(allWorks);
       displayModalGallery(allWorks);
 
+        // Fermer toutes les modales et revenir à la page principale
+
       // Réinitialiser l’interface
       resetFormulaire();
       document.getElementById("apercu-image").style.display = "none";
@@ -337,6 +339,7 @@ const connect = async () => {
       document.querySelector(".label-televersement span").style.display = "block";
       modaleAjout.style.display = "none";
       modal.style.display = "flex";
+      
 
       alert("Work ajouté !");
     } else {
@@ -346,6 +349,8 @@ const connect = async () => {
     console.error("Erreur lors de l'envoi :", error);
     alert("Une erreur est survenue.");
   }
+
+
 };
 
    const validateButton = document.querySelector(".bouton-valider-ajout");
@@ -391,3 +396,24 @@ const connect = async () => {
     document.querySelector(".label-televersement i").style.display = "block";
     document.querySelector(".label-televersement span").style.display = "block";
    }
+
+
+   // retour arriere entre les modales
+   const backArrow = document.querySelector(".retour-modale");
+  const modalAjout = document.getElementById("modale-ajout-photo");
+  const modalGalerie = document.getElementById("modal");
+  backArrow.addEventListener("click", () => {
+  modalAjout.style.display = "none";   
+  modalGalerie.style.display = "flex";  
+});
+
+  // fermer le modale ajout photos
+
+  const closeAjout = document.querySelector(".fermer-modale"); 
+const modalsAjout = document.getElementById("modale-ajout-photo"); 
+const modalsGalerie = document.getElementById("modal");            
+
+closeAjout.addEventListener("click", () => {
+  modalsAjout.style.display = "none";
+  modalsGalerie.style.display = "none"; 
+});

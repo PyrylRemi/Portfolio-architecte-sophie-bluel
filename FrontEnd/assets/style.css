@@ -341,11 +341,12 @@ footer nav ul {
 }
 
 .modifier {
-	position: absolute;
-    top: 64%;
-    right: 26%;
+	color: #3b3b3b;
+	font-size: 16px;
 	cursor: pointer;
+	margin-left: 3%;
 }
+
  /* gestion de l'édition */
 .edition {
 	background-color: black;
@@ -477,6 +478,7 @@ font-weight: 400;
 
 .retour-modale {
   left: 20px;
+  cursor: pointer;
 }
 
 .fermer-modale {
@@ -557,4 +559,31 @@ display: none;
 .retour-modale {
 	width: 100%;
 
+}
+
+.header-projets {
+	display: flex;
+	align-items: center;
+	justify-content: center; 
+	margin-bottom: 6%;
+    margin-top: 8%;
+  }
+
+  h3 {
+	font-family: 'Syne';
+    font-weight: 700;
+    font-size: 30px;
+    color: #1D6154;
+  }
+
+  p.titre-ajout-photo {
+    color: #306685;
+}
+
+p {
+    color: #306685;
+}
+
+input#titre-photo {
+    width: 95%;
 }

@@ -39,14 +39,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-//=========================
-    const loginForm = document.querySelector(".login-form");
-
-    if (loginForm) {
-        loginForm.addEventListener("submit", function(event) {
-            event.preventDefault(); // Empêche le rechargement de la page
-
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-        }
-)};

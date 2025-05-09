@@ -107,7 +107,8 @@ const fetchCategories = async () => {
     }
   
     fetchAllWorks(); 
-  
+    
+
     // Gestion du bouton "logout"
     logout.addEventListener("click", () => {
       if (connected) {
@@ -118,13 +119,17 @@ const fetchCategories = async () => {
         window.location.href = "index.html";
       }
     });
-  
-    // Modale
+
+
+
+    // Modale 1
     const modal = document.getElementById("modal");
     const closeModalBtn = document.querySelector(".close");
   
     modifier.addEventListener("click", () => {
       modal.style.display = "flex";
+      firstModal.style.display = "block";
+      document.querySelector(".modal").style.backgroundColor ="rgba(0, 0, 0, 0.5)";
       displayModalGallery(allWorks);
 
     });
@@ -171,7 +176,7 @@ const fetchCategories = async () => {
   }
   
   // Modale : Suprimer une images
-  async function deleteWork(workId) {
+  const deleteWork =async (workId)=> {
     try {
       const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
         method: "DELETE",
@@ -187,6 +192,9 @@ const fetchCategories = async () => {
         // Recharger les vues
         displayGallery(allWorks); // mise à jour de la galerie principale
         displayModalGallery(allWorks); // mise à jour de la modale
+        // Fermer laa modale ici
+        firstModal.style.display ="none";
+        document.querySelector(".modal").style.backgroundColor ="rgba(0, 0, 0, 0)";
       } else {
         alert("La suppression a échoué.");
       }
@@ -338,7 +346,10 @@ const connect = async () => {
       document.querySelector(".label-televersement i").style.display = "block";
       document.querySelector(".label-televersement span").style.display = "block";
       modaleAjout.style.display = "none";
+      firstModal.style.display ="none";
       modal.style.display = "flex";
+      document.querySelector(".modal").style.backgroundColor ="rgba(0, 0, 0, 0)";
+      
       
 
       alert("Work ajouté !");
@@ -414,6 +425,6 @@ const modalsAjout = document.getElementById("modale-ajout-photo");
 const modalsGalerie = document.getElementById("modal");            
 
 closeAjout.addEventListener("click", () => {
-  modalsAjout.style.display = "none";
+  modalsAjout.style.display = "flex";
   modalsGalerie.style.display = "none"; 
 });

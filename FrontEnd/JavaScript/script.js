@@ -280,6 +280,7 @@ inputFichier.addEventListener("change", (event) => {
     };
     reader.readAsDataURL(fichier);
   } else {
+    alert("Image dépassant 4mo ou format incorrect (jpg,png uniquement)");
     console.error("l'image ne respecte pas les critères");
   }
 });

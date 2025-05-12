@@ -33,6 +33,7 @@ const token = localStorage.getItem("token");
                 localStorage.setItem("token", data.token); // Stocker le token
                 window.location.href = "index.html"; // Rediriger après connexion
             } else {
+                alert("Identifiant ou MDP incorect !");
                 errorMessage.textContent = "Identifiants incorrects.";
             }
         } catch (error) {

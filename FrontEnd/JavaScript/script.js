@@ -131,6 +131,7 @@ const fetchCategories = async () => {
       firstModal.style.display = "block";
       document.querySelector(".modal").style.backgroundColor ="rgba(0, 0, 0, 0.5)";
       displayModalGallery(allWorks);
+      modalAjout.style.display = "none";
 
     });
   
@@ -245,6 +246,7 @@ if (boutonAjouterPhoto) {
 if (boutonFermer) {
   boutonFermer.addEventListener("click", () => {
     modaleAjout.style.display = "none";
+    modalGalerie.style.display ="none";
     resetFormulaire();
   });
 }
